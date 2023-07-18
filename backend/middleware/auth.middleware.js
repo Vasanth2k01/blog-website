@@ -23,8 +23,31 @@ exports.validateEmail = async (req, res, next) => {
 
 exports.generateToken = (user) => {
   const secretKey = keys.SECRET_KEY;
-  const token = jwt.sign({ id: user.id, userName: user.userName }, secretKey, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { userId: user.userId, userName: user.userName },
+    secretKey,
+    {
+      expiresIn: "1h",
+    }
+  );
   return token;
+};
+
+exports.authenticateUser = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    try {
+      const decoded = jwt.verify(token, keys.SECRET_KEY);
+      req.user = decoded;
+      console.log("===", decoded);
+    } catch (error) {
+      return res.status(401).send({ message: "Invalid token" });
+    }
+  } else {
+    return res.status(401).send({ message: "No token provided" });
+  }
+
+  next();
 };

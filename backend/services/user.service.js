@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../middleware/auth.middleware");
+const Blog = require("../models/Blog");
 
 // Route function for creating a user
 exports.createUser = async (req, res) => {
@@ -43,6 +44,10 @@ exports.loginUser = async (req, res) => {
     }
 
     const token = generateToken(user);
+
+    // Set user's name as the author in the blogs
+    const loggedInUserName = user.userName;
+    await Blog.update({ author: loggedInUserName }, { where: {} });
 
     res.send({
       token,

@@ -6,7 +6,7 @@ const sequelize = require("../utils/db");
 const User = sequelize.define(
   "users",
   {
-    id: {
+    userId: {
       type: Sequelize.STRING,
       primaryKey: true,
     },
@@ -31,9 +31,9 @@ const User = sequelize.define(
   {
     hooks: {
       beforeValidate: (user) => {
-        if (!user.id) {
+        if (!user.userId) {
           const randomBytes = crypto.randomBytes(6);
-          user.id = randomBytes.toString("hex");
+          user.userId = randomBytes.toString("hex");
         }
       },
     },
