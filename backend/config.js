@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: "/home/calibraint/blog-website/Backend/utils/.env",
+  path: "/home/calibraint/Documents/Blog-website/blog-website/backend/utils/.env",
 });
 
 exports.keys = {

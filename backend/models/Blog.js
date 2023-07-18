@@ -1,11 +1,10 @@
-// Title Content Author
 const { Sequelize } = require("sequelize");
 const sequelize = require("../utils/db");
 const User = require("../models/User");
 
 const Blog = sequelize.define("blogs", {
-  id: {
-    type: Sequelize.STRING,
+  blogId: {
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
@@ -24,28 +23,22 @@ const Blog = sequelize.define("blogs", {
   },
 });
 
-Blog.associate = (models) => {
-  Blog.belongsTo(models.User, { as: "creator", foreignKey: "author" });
-};
-
 async function getAllBlogsWithCreatorEmail() {
   try {
     const blogs = await Blog.findAll({
-      attributes: {
-        include: [[sequelize.col("creator.email"), "createdByEmail"]],
-      },
-      include: [{ model: User, as: "creator", attributes: [] }],
+      include: [{ model: User, as: "creator", attributes: ["email"] }],
     });
-    console.log(blogs);
+    // console.log(blogs);
   } catch (error) {
-    console.log("Unable to retrieve projects: ", error);
+    console.log("Unable to retrieve blogs: ", error);
   }
 }
 
 sequelize
   .sync()
-  .then(() => {
+  .then(async () => {
     console.log("blogs table created successfully!");
+    // await getAllBlogsWithCreatorEmail();
   })
   .catch((error) => {
     console.error("Unable to create table blogs: ", error);
