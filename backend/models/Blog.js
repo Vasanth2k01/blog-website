@@ -9,12 +9,16 @@ const Blog = sequelize.define("blogs", {
     autoIncrement: true,
     allowNull: false,
   },
+  userId: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
   },
   content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: true,
   },
   author: {
@@ -28,7 +32,6 @@ async function getAllBlogsWithCreatorEmail() {
     const blogs = await Blog.findAll({
       include: [{ model: User, as: "creator", attributes: ["email"] }],
     });
-    // console.log(blogs);
   } catch (error) {
     console.log("Unable to retrieve blogs: ", error);
   }

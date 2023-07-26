@@ -45,7 +45,7 @@ exports.loginUser = async (req, res) => {
 
     const token = generateToken(user);
 
-    // Set user's name as the author in the blogs
+    // Set user name as the author in the blogs
     const loggedInUserName = user.userName;
     await Blog.update({ author: loggedInUserName }, { where: {} });
 
