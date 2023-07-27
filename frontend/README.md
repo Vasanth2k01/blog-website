@@ -74,7 +74,7 @@ To run the website locally, follow these steps:
 
 ## APIs
 
-The backend APIs are provided using Express.js and MongoDB to manage user registration, authentication, and CRUD operations for blogs.
+The backend APIs are provided using Express.js and MySQL and Sequelize to manage user registration, authentication, and CRUD operations for blogs.
 
 - POST /api/signup: Register a new user.
 - POST /api/login: Log in an existing user.
