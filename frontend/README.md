@@ -83,3 +83,5 @@ The backend APIs are provided using Express.js and MySQL and Sequelize to manage
 - POST /api/blog: Create a new blog.
 - PUT /api/blog/:blogId: Update an existing blog.
 - DELETE /api/blog/:blogId: Delete a blog.
+
+### To know more about my blog website, check out the [Documentation](https://docs.google.com/document/d/1D8jLm-6SNM7zjZY-cidjUFZTRMut8NZpJc0ChL5BcMU/edit).
