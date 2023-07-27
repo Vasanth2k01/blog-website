@@ -27,21 +27,10 @@ const Blog = sequelize.define("blogs", {
   },
 });
 
-async function getAllBlogsWithCreatorEmail() {
-  try {
-    const blogs = await Blog.findAll({
-      include: [{ model: User, as: "creator", attributes: ["email"] }],
-    });
-  } catch (error) {
-    console.log("Unable to retrieve blogs: ", error);
-  }
-}
-
 sequelize
   .sync()
   .then(async () => {
     console.log("blogs table created successfully!");
-    // await getAllBlogsWithCreatorEmail();
   })
   .catch((error) => {
     console.error("Unable to create table blogs: ", error);

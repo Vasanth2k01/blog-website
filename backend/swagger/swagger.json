@@ -17,44 +17,6 @@
           }
         }
       }
-    },
-    "/api/users": {
-      "post": {
-        "summary": "Create Users to the users database",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "userName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "organisation": {
-                    "type": "string"
-                  }
-                },
-                "required": ["userName", "email", "password", "organisation"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Successful response"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
     }
   }
 }

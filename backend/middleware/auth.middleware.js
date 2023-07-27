@@ -27,7 +27,7 @@ exports.generateToken = (user) => {
     { userId: user.userId, userName: user.userName },
     secretKey,
     {
-      expiresIn: "2h",
+      expiresIn: "1d",
     }
   );
   return token;

@@ -1,5 +1,6 @@
 const Blog = require("../models/Blog");
 
+// Route to add blog
 exports.addBlog = async (req, res) => {
   console.log("Create blog endpoint hit");
   const { title, content } = req.body;
@@ -26,6 +27,7 @@ exports.addBlog = async (req, res) => {
   }
 };
 
+// Route to show all blog
 exports.showBlog = async (req, res) => {
   console.log("View blog endpoint hit");
   if (req.user) {
@@ -42,6 +44,7 @@ exports.showBlog = async (req, res) => {
   }
 };
 
+// Route to get blog by id
 exports.getBlogById = async (req, res) => {
   console.log("View blog by id endpoint hit");
 
@@ -61,6 +64,7 @@ exports.getBlogById = async (req, res) => {
   }
 };
 
+// Route to update blog
 exports.updateBlog = async (req, res) => {
   console.log("Update blog endpoint hit");
   const { blogId } = req.params;
@@ -92,6 +96,7 @@ exports.updateBlog = async (req, res) => {
   }
 };
 
+// Route to delete blog
 exports.deleteBlog = async (req, res) => {
   console.log("Delete blog endpoint hit");
   const { blogId } = req.params;

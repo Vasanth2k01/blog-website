@@ -28,6 +28,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
+// Route for login user
 exports.loginUser = async (req, res) => {
   console.log("Login user endpoint hit");
   const { userName, password } = req.body;
