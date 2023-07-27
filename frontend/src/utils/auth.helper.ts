@@ -1,3 +1,5 @@
+import { emailPattern } from "./constants";
+
 export const isTokenExpired = (token: string | null): boolean => {
   if (!token) {
     return false;
@@ -20,4 +22,15 @@ export const isTokenExpired = (token: string | null): boolean => {
   } catch (error) {
     return false;
   }
+};
+
+export const validatePassword = (_: any, value: string) => {
+  if (value.length < 6) {
+    return Promise.reject("Enter a valid password eg: Test@12!");
+  }
+  if (!emailPattern.PATTERN.test(value)) {
+    return Promise.reject("Enter a valid password eg: Test@12!");
+  }
+
+  return Promise.resolve();
 };

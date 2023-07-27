@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { signupUserAsync } from "../../reducer/userSlice";
 import { AppDispatch } from "../../reducer/store";
 import { emailPattern } from "../../utils/constants";
+import { validatePassword } from "../../utils/auth.helper";
 
 const FormComp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -13,17 +14,6 @@ const FormComp: React.FC = () => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  };
-
-  const validatePassword = (_: any, value: string) => {
-    if (value.length < 6) {
-      return Promise.reject("Enter a valid password eg: Test@12!");
-    }
-    if (!emailPattern.PATTERN.test(value)) {
-      return Promise.reject("Enter a valid password eg: Test@12!");
-    }
-
-    return Promise.resolve();
   };
 
   const onFinish = (values: any) => {
