@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Form, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUserAsync } from "../../reducer/userSlice";
-import { AppDispatch, RootState } from "../../reducer/store";
+import { AppDispatch } from "../../reducer/store";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../reducer/api";
 

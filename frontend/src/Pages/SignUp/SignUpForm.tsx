@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupUserAsync } from "../../reducer/userSlice";
-import { AppDispatch } from "../../reducer/store";
-import { emailPattern } from "../../utils/constants";
+import { AppDispatch, RootState } from "../../reducer/store";
 import { validatePassword } from "../../utils/auth.helper";
+import { useNavigate } from "react-router-dom";
 
 const FormComp: React.FC = () => {
+  const signup = useSelector((state: RootState) => state.user.signupStatus);
+  const navigate = useNavigate();
+
   const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -20,6 +23,13 @@ const FormComp: React.FC = () => {
     const { userName, email, password, organisation } = values;
     dispatch(signupUserAsync({ userName, email, password, organisation }));
   };
+
+  useEffect(() => {
+    if (signup === true) {
+      form.resetFields();
+      navigate("/login");
+    }
+  }, [signup]);
 
   const onFinishFailed = (errorInfo: any) => {
     return errorInfo;

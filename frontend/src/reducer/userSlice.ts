@@ -17,12 +17,14 @@ interface UserState {
   data: User | null;
   loading: boolean;
   error: string | null;
+  signupStatus: boolean;
 }
 
 const initialState: UserState = {
   data: null,
   loading: false,
   error: null,
+  signupStatus: false,
 };
 
 const userSlice = createSlice({
@@ -41,6 +43,9 @@ const userSlice = createSlice({
     signupFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    setSignupStatus: (state) => {
+      state.signupStatus = true;
     },
     loginStart: (state) => {
       state.loading = true;
@@ -64,6 +69,7 @@ export const signupUserAsync =
       dispatch(signupStart());
       const response = await signupUser(userData);
       dispatch(signupSuccess(response));
+      dispatch(setSignupStatus());
       message.success(showMessage.SIGNUP);
     } catch (error: any) {
       dispatch(signupFailure(error.message));
@@ -98,6 +104,7 @@ export const {
   signupFailure,
   loginStart,
   loginSuccess,
+  setSignupStatus,
   loginFailure,
 } = userSlice.actions;
 
