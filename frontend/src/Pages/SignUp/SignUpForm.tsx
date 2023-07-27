@@ -62,7 +62,7 @@ const FormComp: React.FC = () => {
         <Form.Item
           label="Password"
           name="password"
-          rules={[{ validator: validatePassword }]}
+          rules={[{ required: true, validator: validatePassword }]}
         >
           <Input.Password />
         </Form.Item>
