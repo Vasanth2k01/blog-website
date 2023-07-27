@@ -14,4 +14,5 @@ export enum blogMessage {
 
 export const emailPattern = {
   PATTERN: /(?=.*[!@#$%^&*])(?=.*[A-Z])/,
+  NOTIFY: "Enter a valid password eg: Test@12!",
 };

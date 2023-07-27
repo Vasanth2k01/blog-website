@@ -26,10 +26,10 @@ export const isTokenExpired = (token: string | null): boolean => {
 
 export const validatePassword = (_: any, value: string) => {
   if (value.length < 6) {
-    return Promise.reject("Enter a valid password eg: Test@12!");
+    return Promise.reject(emailPattern.NOTIFY);
   }
   if (!emailPattern.PATTERN.test(value)) {
-    return Promise.reject("Enter a valid password eg: Test@12!");
+    return Promise.reject(emailPattern.NOTIFY);
   }
 
   return Promise.resolve();
