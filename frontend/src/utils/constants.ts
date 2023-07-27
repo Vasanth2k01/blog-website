@@ -11,3 +11,7 @@ export enum blogMessage {
   DELETE = "Blog deleted successfully!",
   ERROR = "Failed to retrieve blogs!",
 }
+
+export const emailPattern = {
+  PATTERN: /(?=.*[!@#$%^&*])(?=.*[A-Z])/,
+};

@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { signupUserAsync } from "../../reducer/userSlice";
 import { AppDispatch } from "../../reducer/store";
+import { emailPattern } from "../../utils/constants";
 
 const FormComp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -18,7 +19,7 @@ const FormComp: React.FC = () => {
     if (value.length < 6) {
       return Promise.reject("Enter a valid password eg: Test@12!");
     }
-    if (!/(?=.*[!@#$%^&*])(?=.*[A-Z])/.test(value)) {
+    if (!emailPattern.PATTERN.test(value)) {
       return Promise.reject("Enter a valid password eg: Test@12!");
     }
 
