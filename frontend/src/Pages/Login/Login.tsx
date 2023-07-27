@@ -1,7 +1,6 @@
-// LoginPage.tsx
 import React from "react";
 import LoginForm from "./LoginForm";
-import "../../components/Home/Home.css";
+import "../../Pages/Home/Home.css";
 
 import "../../App.css";
 import { motion } from "framer-motion";

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import FormComp from "../Form";
+import FormComp from "../SignUp/SignUpForm";
 import "./Home.css";
 import "../../App.css";
 

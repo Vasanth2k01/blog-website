@@ -4,7 +4,7 @@ This is a blog website where users can create, edit, and view blogs. The website
 
 ## Features
 
-- User Authentication: Users can sign up and log in to the website using their email and password.
+- User Authentication: Users can sign up and log in to the website using their user name, email, password and organisation.
 - Create Blog: Authenticated users can create new blogs by providing a title and content.
 - Edit Blog: Users can edit their existing blogs, updating the title and content.
 - View Blog: All blogs are displayed on the homepage, and users can click on a blog to read the full content.
@@ -32,30 +32,45 @@ To run the website locally, follow these steps:
 
 ## Folder Structure
 
-Copy code
+```
 |-- src
 |-- components
-| |-- BlogList.js
-| |-- BlogForm.js
-| |-- BlogDetails.js
+| |--Auth
+| | |-- PrivateRoute.tsx
+| |-- Blog
+| | |-- EditBlog.tsx
+| | |-- EditBlog.css
+| |-- Blog.tsx
+| |-- Blog.css
 | |-- ...
 |-- pages
-| |-- Home.js
-| |-- Login.js
-| |-- Register.js
+| |-- Home
+| | |-- Home.tsx
+| | |-- Home.css
+| |-- Login
+| | |-- Login.tsx
+| | |-- LoginForm.tsx
+| |-- SignUp
+| | |-- SignUpForm.tsx
 | |-- ...
 |-- reducer
-| |-- blogSlice.js
-| |-- userSlice.js
-| |-- api.js
+| |-- api.ts
+| |-- blogSlice.ts
+| |-- userSlice.ts
+| |-- store.ts
 | |-- ...
-|-- App.js
+|-- App.tsx
+|-- App.css
 |-- index.js
 |-- ...
+|-- utils
+| |-- auth.helper.ts
+| |-- constants.ts
 |-- public
 |-- package.json
-|-- server.js
+|-- tsconfig.json
 |-- ...
+```
 
 ## APIs
 

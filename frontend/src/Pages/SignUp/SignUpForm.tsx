@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
-import { signupUserAsync } from "../reducer/userSlice";
-import { AppDispatch } from "../reducer/store";
+import { signupUserAsync } from "../../reducer/userSlice";
+import { AppDispatch } from "../../reducer/store";
 
 const FormComp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();

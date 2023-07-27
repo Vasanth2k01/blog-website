@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { Blog } from "./blogSlice";
 import { message } from "antd";
+import { blogMessage } from "../utils/constants";
 
 const BASE_URL = "http://localhost:4200/api";
 
@@ -125,7 +126,7 @@ export const deleteBlog = async (blogId: string, token: string) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    message.success("Blog deleted successfully!");
+    message.success(blogMessage.DELETE);
   } catch (error) {
     console.error("Failed to delete blog:", error);
     throw new Error("Failed to delete blog");

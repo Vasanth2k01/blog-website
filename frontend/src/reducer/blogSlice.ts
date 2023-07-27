@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
 import { message } from "antd";
 import { getBlog } from "./api";
+import { blogMessage } from "../utils/constants";
 
 export interface Blog {
   blogId: string;
@@ -50,7 +51,7 @@ export const getBlogsAsync = () => async (dispatch: AppDispatch) => {
     dispatch(getBlogSuccess(response));
   } catch (error: any) {
     dispatch(getBlogFailure(error.message));
-    message.error("Failed to retrieve blogs!");
+    message.error(blogMessage.ERROR);
   }
 };
 

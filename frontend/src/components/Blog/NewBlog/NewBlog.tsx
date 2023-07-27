@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducer/store";
-import { createBlog } from "../../reducer/api";
-import { Blog } from "../../reducer/blogSlice";
+import { RootState } from "../../../reducer/store";
+import { createBlog } from "../../../reducer/api";
+import { Blog } from "../../../reducer/blogSlice";
 import { Form, Input, Button, Row, Col, Typography, message } from "antd";
 import { ArrowLeftOutlined, EyeOutlined } from "@ant-design/icons";
-import MDEditor from "@uiw/react-md-editor";
-import "./NewBlog.css";
+import MDEditor, { title } from "@uiw/react-md-editor";
+import "../Blog.css";
 import { useNavigate } from "react-router-dom";
+import { blogMessage } from "../../../utils/constants";
 
 const { Title } = Typography;
 
@@ -24,7 +25,9 @@ const NewBlog: React.FC = () => {
 
   const handleFormValuesChange = (changedValues: any, allValues: any) => {
     if (changedValues.title) {
-      const uppercaseTitle = changedValues.title.toUpperCase();
+      const uppercaseTitle =
+        changedValues.title[0].toUpperCase() +
+        changedValues.title.slice(1).toLowerCase();
       form.setFieldsValue({ title: uppercaseTitle });
     }
   };
@@ -44,7 +47,7 @@ const NewBlog: React.FC = () => {
       };
 
       await createBlog(newBlog, token);
-      message.success("Blog added successfully!");
+      message.success(blogMessage.ADD);
     } catch (error) {
       console.error("Failed to create the blog:", error);
     }

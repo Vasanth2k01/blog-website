@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Blog } from "../../reducer/blogSlice";
 import { deleteBlog, getBlog } from "../../reducer/api";
 import { useNavigate } from "react-router-dom";
-import "./NewBlog.css";
+import "./Blog.css";
 import { Alert, Form, Modal, Space, Spin, message } from "antd";
 
 const BlogComp: React.FC = () => {
@@ -79,7 +79,9 @@ const BlogComp: React.FC = () => {
   return (
     <div>
       <header className="header">
-        <h1 style={{ color: "#fff", margin: "0", padding: "0" }}>BLOGGER</h1>
+        <h1 style={{ color: "#fff", margin: "0", padding: "0" }}>
+          CALIB BLOGGER
+        </h1>
         <button onClick={logout} className="logout-button">
           Log out
         </button>
@@ -107,7 +109,7 @@ const BlogComp: React.FC = () => {
             filteredBlogs.map((blog: Blog) => (
               <div key={blog.blogId} className="blog-item">
                 <div className="avatar">{getFirstLetter(blog.title)}</div>
-                <div className="blog-title" style={{ marginRight: "50em" }}>
+                <div className="blog-title">
                   <h3 onClick={() => viewBlog(blog?.blogId)}>{blog.title}</h3>
                 </div>
                 <div>
@@ -127,15 +129,7 @@ const BlogComp: React.FC = () => {
               </div>
             ))
           ) : (
-            <Space direction="vertical" style={{ width: "100%" }}>
-              <Spin tip="Loading...">
-                <Alert
-                  message="Failed to load blogs"
-                  description="Token expired, login to proceed further or No blogs found!"
-                  type="info"
-                />
-              </Spin>
-            </Space>
+            <div> No blogs found. </div>
           )}
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>

@@ -1,4 +1,3 @@
-// LoginForm.tsx
 import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,6 +49,7 @@ const LoginForm: React.FC = () => {
         <Form.Item
           label="Password"
           name="password"
+          style={{}}
           rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password />

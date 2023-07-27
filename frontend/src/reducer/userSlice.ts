@@ -3,6 +3,7 @@ import { AppDispatch } from "./store";
 import { login, signupUser } from "./api";
 import { message } from "antd";
 import { AxiosInstance } from "axios";
+import { showMessage } from "../utils/constants";
 
 export interface User {
   userName: string;
@@ -63,10 +64,10 @@ export const signupUserAsync =
       dispatch(signupStart());
       const response = await signupUser(userData);
       dispatch(signupSuccess(response));
-      message.success("Sign up successfully!");
+      message.success(showMessage.SIGNUP);
     } catch (error: any) {
       dispatch(signupFailure(error.message));
-      message.error("Recheck the values!");
+      message.error(showMessage.EMAIL);
     }
   };
 
@@ -83,11 +84,11 @@ export const loginUserAsync =
       };
       dispatch(loginSuccess(userWithToken));
 
-      message.success("Logged in successfully!");
+      message.success(showMessage.LOGIN);
     } catch (error: any) {
       dispatch(loginFailure(error.message));
 
-      message.error("Invalid credentials!");
+      message.error(showMessage.ERROR);
     }
   };
 

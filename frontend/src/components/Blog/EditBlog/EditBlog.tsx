@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Blog } from "../../reducer/blogSlice";
-import { getBlogById, updateBlog } from "../../reducer/api";
+import { Blog } from "../../../reducer/blogSlice";
+import { getBlogById, updateBlog } from "../../../reducer/api";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Form, Input, Button, Row, Col, Typography, message } from "antd";
 import MDEditor from "@uiw/react-md-editor";
-import "../Blog/NewBlog.css";
-import "../Blog/EditBlog.css";
+import "../../Blog/Blog.css";
+import "../../Blog/EditBlog/EditBlog.css";
+import { blogMessage } from "../../../utils/constants";
 
 const { Title } = Typography;
 
@@ -51,11 +52,20 @@ const EditBlog: React.FC = () => {
         };
 
         await updateBlog(blogId, updatedBlog, token);
-        message.success("Blog updated successfully!");
+        message.success(blogMessage.UPDATE);
         navigate("/blog");
       }
     } catch (error) {
       console.error("Failed to update blog:", error);
+    }
+  };
+
+  const handleFormValuesChange = (changedValues: any, allValues: any) => {
+    if (changedValues.title) {
+      const uppercaseTitle =
+        changedValues.title[0].toUpperCase() +
+        changedValues.title.slice(1).toLowerCase();
+      form.setFieldsValue({ title: uppercaseTitle });
     }
   };
 
@@ -85,19 +95,24 @@ const EditBlog: React.FC = () => {
             layout="vertical"
             initialValues={blog || {}}
             onFinish={onFinish}
+            onValuesChange={handleFormValuesChange}
           >
             {!viewContentPage && (
               <Form.Item
                 name="title"
                 rules={[{ required: false, message: "Please enter a title." }]}
               >
-                <Input size="large" className="input-title" />
+                <Input
+                  size="large"
+                  className="input-title"
+                  style={{ marginLeft: "15px" }}
+                />
               </Form.Item>
             )}
 
-            <div data-color-mode="light" className="show-content ">
+            <div data-color-mode="light" className="show-content">
               {viewContentPage ? (
-                <div className="content-preview boxed">
+                <div className="view-content">
                   <MDEditor.Markdown source={blog?.content} />
                   <div className="author-section">
                     <h3>Autor: {blog?.author}</h3>
@@ -110,7 +125,10 @@ const EditBlog: React.FC = () => {
                     { required: true, message: "Please enter the content." },
                   ]}
                 >
-                  <MDEditor style={{ height: "400px", borderRadius: "8px" }} />
+                  <MDEditor
+                    className="editor"
+                    style={{ height: "400px", borderRadius: "8px" }}
+                  />
                 </Form.Item>
               )}
             </div>
