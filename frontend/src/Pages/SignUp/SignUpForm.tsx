@@ -6,13 +6,20 @@ import { AppDispatch } from "../../reducer/store";
 
 const FormComp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [form] = Form.useForm();
+
+  const formContainer = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
 
   const validatePassword = (_: any, value: string) => {
     if (value.length < 6) {
-      return Promise.reject("Enter a valid password!");
+      return Promise.reject("Enter a valid password eg: Test@12!");
     }
     if (!/(?=.*[!@#$%^&*])(?=.*[A-Z])/.test(value)) {
-      return Promise.reject("Enter a valid password!");
+      return Promise.reject("Enter a valid password eg: Test@12!");
     }
 
     return Promise.resolve();
@@ -23,17 +30,14 @@ const FormComp: React.FC = () => {
     dispatch(signupUserAsync({ userName, email, password, organisation }));
   };
 
-  const onFinishFailed = (errorInfo: any) => {};
+  const onFinishFailed = (errorInfo: any) => {
+    return errorInfo;
+  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div style={formContainer}>
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -76,7 +80,11 @@ const FormComp: React.FC = () => {
           label="Organisation"
           name="organisation"
           rules={[
-            { required: true, message: "Please input your organisation!" },
+            {
+              required: true,
+              message: "Please input your organisation!",
+              max: 255,
+            },
           ]}
         >
           <Input />

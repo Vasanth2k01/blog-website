@@ -1,21 +1,27 @@
 .home-container {
-    background: linear-gradient(165deg, #8C8787, #ffffff 50%, #ffffff 50%, #f8f8f8);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 56em;
-  }
-  
-  .motion-container {
-    max-width: 600px;
-    width: 100%;
-    background: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title-colour{
-    color: #8C8787;
-  }
+  background: linear-gradient(
+    165deg,
+    #8c8787,
+    #ffffff 50%,
+    #ffffff 50%,
+    #f8f8f8
+  );
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 56em;
+}
+
+.motion-container {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title-colour {
+  color: #8c8787;
+}
