@@ -1,3 +1,5 @@
+export const BASE_URL = "http://localhost:4200/api";
+
 export enum showMessage {
   SIGNUP = "Signup successfully",
   LOGIN = "Login successfully",

@@ -4,6 +4,7 @@ import { deleteBlog, getBlog } from "../../reducer/api";
 import { useNavigate } from "react-router-dom";
 import "./Blog.css";
 import { Alert, Form, Modal, Space, Spin, message } from "antd";
+import { routes } from "../../utils/routes";
 
 const BlogComp: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[] | null>(null);
@@ -26,7 +27,7 @@ const BlogComp: React.FC = () => {
   }, [token]);
 
   const handleEdit = (blogId: string, content: string) => {
-    navigate(`/blog/edit/${blogId}`, { state: { content } });
+    navigate(`${routes.blog.EDIT}/${blogId}`, { state: { content } });
   };
 
   const handleDelete = (blogId: any) => {
@@ -73,7 +74,7 @@ const BlogComp: React.FC = () => {
 
   const viewBlog = (blogId: string) => {
     setViewContentPage(true);
-    navigate(`/blog/edit/${blogId}?viewContentPage=true`);
+    navigate(`${routes.blog.EDIT}/${blogId}?viewContentPage=true`);
   };
 
   return (

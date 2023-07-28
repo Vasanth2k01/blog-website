@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import FormComp from "../SignUp/SignUpForm";
 import "./Home.css";
 import "../../App.css";
+import { routes } from "../../utils/routes";
 
 const Home: React.FC = () => {
   const containerVariants = {
@@ -38,7 +39,7 @@ const Home: React.FC = () => {
           style={{ marginTop: "20px", textAlign: "center" }}
           variants={formVariants}
         >
-          Already have an account? <a href="/login">Log In</a>
+          Already have an account? <a href={routes.LOGIN}>Log In</a>
         </motion.p>
       </motion.div>
     </div>

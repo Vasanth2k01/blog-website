@@ -7,8 +7,7 @@ import MDEditor from "@uiw/react-md-editor";
 import "../../Blog/Blog.css";
 import "../../Blog/EditBlog/EditBlog.css";
 import { blogMessage } from "../../../utils/constants";
-
-const { Title } = Typography;
+import { routes } from "../../../utils/routes";
 
 const EditBlog: React.FC = () => {
   const { blogId } = useParams();
@@ -53,18 +52,17 @@ const EditBlog: React.FC = () => {
 
         await updateBlog(blogId, updatedBlog, token);
         message.success(blogMessage.UPDATE);
-        navigate("/blog");
+        navigate(routes.blog.BLOG);
       }
     } catch (error) {
-      console.error("Failed to update blog:", error);
+      message.error("Failed to update blog");
     }
   };
 
   const handleFormValuesChange = (changedValues: any, allValues: any) => {
     if (changedValues.title) {
       const uppercaseTitle =
-        changedValues.title[0].toUpperCase() +
-        changedValues.title.slice(1).toLowerCase();
+        changedValues.title[0].toUpperCase() + changedValues.title.slice(1);
       form.setFieldsValue({ title: uppercaseTitle });
     }
   };
@@ -72,7 +70,7 @@ const EditBlog: React.FC = () => {
   return (
     <div className="edit-blog-container">
       <Row justify="start" align="middle" className="header">
-        <Button onClick={() => navigate("/blog")}>Back</Button>
+        <Button onClick={() => navigate(routes.blog.BLOG)}>Back</Button>
         <h1 className="content-title" style={{ marginLeft: "23em" }}>
           {blog?.title}
         </h1>

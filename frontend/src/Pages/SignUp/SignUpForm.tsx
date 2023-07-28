@@ -5,6 +5,7 @@ import { signupUserAsync } from "../../reducer/userSlice";
 import { AppDispatch, RootState } from "../../reducer/store";
 import { validatePassword } from "../../utils/auth.helper";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../utils/routes";
 
 const FormComp: React.FC = () => {
   const signup = useSelector((state: RootState) => state.user.signupStatus);
@@ -27,7 +28,7 @@ const FormComp: React.FC = () => {
   useEffect(() => {
     if (signup === true) {
       form.resetFields();
-      navigate("/login");
+      navigate(routes.LOGIN);
     }
   }, [signup]);
 

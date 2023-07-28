@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useDispatch } from "react-redux";
 import { loginUserAsync } from "../../reducer/userSlice";
 import { AppDispatch } from "../../reducer/store";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../../reducer/api";
+import { routes } from "../../utils/routes";
 
 const LoginForm: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -13,11 +14,11 @@ const LoginForm: React.FC = () => {
   const onFinish = async (values: any) => {
     const { userName, password } = values;
     await dispatch(loginUserAsync({ userName, password }, instance));
-    navigation("/blog");
+    navigation(routes.blog.BLOG);
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    message.error("Failed:", errorInfo);
   };
 
   return (
