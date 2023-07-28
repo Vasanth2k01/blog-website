@@ -50,7 +50,7 @@ The backend code is organized in the following folder structure:
 
 ## Models:
 
-- User: A Sequelize model for storing user information, including name, email, and password.
+- User: A Sequelize model for storing user information, including name, email, password and organisation.
 - Blog: A Sequelize model for storing blog information, including title, content, and author.
 
 ## Configuration:
