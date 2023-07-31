@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../utils/db");
 const User = require("../models/User");
+const { blogMessage } = require("../utils/constants");
 
 const Blog = sequelize.define("blogs", {
   blogId: {
@@ -30,10 +31,10 @@ const Blog = sequelize.define("blogs", {
 sequelize
   .sync()
   .then(async () => {
-    console.log("blogs table created successfully!");
+    console.log(blogMessage.model.blog.CREATEBLOG);
   })
   .catch((error) => {
-    console.error("Unable to create table blogs: ", error);
+    console.error(blogMessage.model.FAIL, error);
   });
 
 module.exports = Blog;

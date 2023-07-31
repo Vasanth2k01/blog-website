@@ -1,4 +1,5 @@
 const Blog = require("../models/Blog");
+const { blogMessage } = require("../utils/constants");
 
 // Route to add blog
 exports.addBlog = async (req, res) => {
@@ -17,13 +18,13 @@ exports.addBlog = async (req, res) => {
         author,
       });
 
-      res.status(200).send({ message: "Blog added successfully!" });
+      res.status(200).send({ message: blogMessage.ADD });
     } catch (error) {
       console.error("Error creating blog:", error);
-      res.status(500).send({ message: "Failed to create blog." });
+      res.status(500).send({ message: blogMessage.ADDFAIL });
     }
   } else {
-    res.status(401).send({ message: "Invalid token" });
+    res.status(401).send({ message: blogMessage.token.INVALID });
   }
 };
 
@@ -34,13 +35,27 @@ exports.showBlog = async (req, res) => {
     try {
       const blogs = await Blog.findAll({ where: { userId: req.user.userId } });
       if (blogs.length === 0) {
-        return res.status(404).send({ message: "No blogs found." });
+        return res.status(404).send({ message: blogMessage.NOBLOG });
       }
       res.status(200).send(blogs);
     } catch {
       console.error("Error fetching blogs :", error);
-      res.status(500).send({ message: "Failed to fetch blogs." });
+      res.status(500).send({ message: blogMessage.FETCHFAIL });
     }
+  }
+};
+
+exports.showAllBlog = async (req, res) => {
+  console.log("View All blog endpoint hit");
+  try {
+    const blogs = await Blog.findAll();
+    if (blogs.length === 0) {
+      return res.status(404).send({ message: blogMessage.NOBLOG });
+    }
+    res.status(200).send(blogs);
+  } catch {
+    console.error("Error fetching blogs :", error);
+    res.status(500).send({ message: blogMessage.FETCHFAIL });
   }
 };
 
@@ -57,10 +72,10 @@ exports.getBlogById = async (req, res) => {
       res.status(200).send(blog);
     } catch (error) {
       console.error("Error fetching blog:", error);
-      res.status(500).send({ message: "Failed to fetch blog." });
+      res.status(500).send({ message: blogMessage.FETCHFAIL });
     }
   } else {
-    res.status(401).send({ message: "Invalid token" });
+    res.status(401).send({ message: blogMessage.token.INVALID });
   }
 };
 
@@ -75,24 +90,24 @@ exports.updateBlog = async (req, res) => {
       const blog = await Blog.findByPk(blogId);
 
       if (!blog) {
-        return res.status(404).send({ message: "Blog not found." });
+        return res.status(404).send({ message: blogMessage.NOTFOUND });
       }
 
       if (blog.author !== req.user.userName) {
         return res
           .status(403)
-          .send({ message: "You are not authorized to update this blog." });
+          .send({ message: blogMessage.token.NOTAUTHORIZED });
       }
 
       await blog.update({ title, content });
 
-      res.status(200).send({ message: "Blog updated successfully!" });
+      res.status(200).send({ message: blogMessage.UPDATE });
     } catch (error) {
       console.error("Error updating blog:", error);
-      res.status(500).send({ message: "Failed to update blog." });
+      res.status(500).send({ message: blogMessage.UPDATEFAIL });
     }
   } else {
-    res.status(401).send({ message: "Invalid token" });
+    res.status(401).send({ message: blogMessage.token.INVALID });
   }
 };
 
@@ -106,23 +121,23 @@ exports.deleteBlog = async (req, res) => {
       const blog = await Blog.findByPk(blogId);
 
       if (!blog) {
-        return res.status(404).send({ message: "Blog not found." });
+        return res.status(404).send({ message: blogMessage.NOTFOUND });
       }
 
       if (blog.author !== req.user.userName) {
         return res
           .status(403)
-          .send({ message: "You are not authorized to delete this blog." });
+          .send({ message: blogMessage.token.NOTAUTHORIZED });
       }
 
       await blog.destroy();
 
-      res.status(200).send({ message: "Blog deleted successfully!" });
+      res.status(200).send({ message: blogMessage.DELETE });
     } catch (error) {
       console.error("Error deleting blog:", error);
-      res.status(500).send({ message: "Failed to delete blog." });
+      res.status(500).send({ message: blogMessage.DELETEFAIL });
     }
   } else {
-    res.status(401).send({ message: "Invalid token" });
+    res.status(401).send({ message: blogMessage.token.INVALID });
   }
 };

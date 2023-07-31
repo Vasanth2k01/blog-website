@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../middleware/auth.middleware");
 const Blog = require("../models/Blog");
+const { userMessage } = require("../utils/constants");
 
 // Route function for creating a user
 exports.createUser = async (req, res) => {
@@ -11,7 +12,7 @@ exports.createUser = async (req, res) => {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).send({
-        message: "Email already in use. Please use a different email address!",
+        message: userMessage.EMAILERROR,
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,10 +22,10 @@ exports.createUser = async (req, res) => {
       password: hashedPassword,
       organisation,
     });
-    res.status(200).send({ message: "User added successfully!" });
+    res.status(200).send({ message: userMessage.ADDUSER });
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).send({ message: "Failed to create user." });
+    res.status(500).send({ message: userMessage.ADDFAIL });
   }
 };
 
@@ -36,12 +37,12 @@ exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ where: { userName } });
     if (!user) {
-      return res.status(404).send("Please sign up to continue!");
+      return res.status(404).send(userMessage.SIGNUP);
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-      return res.status(401).send("Invalid password!");
+      return res.status(401).send(userMessage.INVALID_PASSWORD);
     }
 
     const token = generateToken(user);
@@ -52,10 +53,10 @@ exports.loginUser = async (req, res) => {
 
     res.send({
       token,
-      message: `User login successfully! Welcome ${userName}!`,
+      message: `${userMessage.LOGIN_SUCCESSFULL} ${userName}!`,
     });
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).send({ message: "Failed to login." });
+    res.status(500).send({ message: userMessage.LOGIN_FAIL });
   }
 };

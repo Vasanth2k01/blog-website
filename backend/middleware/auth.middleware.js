@@ -7,18 +7,9 @@ exports.Exception = (handler) => {
       await handler(req, res, next);
     } catch (error) {
       console.error(error);
-      res.status(500).send({ message: "Route not found/Duplicate entries" });
+      res.status(500).send({ message: authMessage.DUPLICATE });
     }
   };
-};
-
-exports.validateEmail = async (req, res, next) => {
-  const email = req.body.email;
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!pattern.test(email)) {
-    return res.status(400).send({ message: "Invalid email format" });
-  }
-  next();
 };
 
 exports.generateToken = (user) => {
@@ -42,10 +33,10 @@ exports.authenticateUser = (req, res, next) => {
       const decoded = jwt.verify(token, keys.SECRET_KEY);
       req.user = decoded;
     } catch (error) {
-      return res.status(401).send({ message: "Invalid token" });
+      return res.status(401).send({ message: blogMessage.token.INVALID });
     }
   } else {
-    return res.status(401).send({ message: "No token provided" });
+    return res.status(401).send({ message: blogMessage.token.NOTOKEN });
   }
 
   next();

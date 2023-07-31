@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const { keys } = require("../config");
+const { dbMessage } = require("./constants");
 
 const sequelize = new Sequelize(
   keys.MYSQL_DATABASE,
@@ -19,14 +20,14 @@ const sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
-    return sequelize.query("CREATE DATABASE IF NOT EXISTS BLOG_users;");
+    console.log(dbMessage.ESTABLISH_CONNECTION);
+    return sequelize.query(dbMessage.CREATE);
   })
   .then(() => {
-    console.log("Database created or already exists.");
+    console.log(dbMessage.ALREADY_EXIST);
   })
   .catch((error) => {
-    console.error("Unable to create the database: ", error);
+    console.error(dbMessage.FAIL, error);
   });
 
 module.exports = sequelize;

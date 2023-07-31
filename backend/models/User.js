@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const sequelize = require("../utils/db");
+const { userMessage } = require("../utils/constants");
 
 const User = sequelize.define(
   "users",
@@ -52,10 +53,10 @@ User.prototype.comparePassword = async function (password) {
 sequelize
   .sync()
   .then(() => {
-    console.log("users table created successfully!");
+    console.log(userMessage.model.user.CREATE);
   })
   .catch((error) => {
-    console.error("Unable to create table : ", error);
+    console.error(userMessage.model.user.FAIL, error);
   });
 
 module.exports = User;
